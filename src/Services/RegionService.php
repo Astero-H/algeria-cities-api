@@ -23,7 +23,7 @@ class RegionService extends BaseService {
     }
 
     public function getRegionByName(string $name) {
-        return $this->handleDataList($name, $this->regionsData,'name');
+        return $this->handleDataListWithName($name, $this->regionsData,'name');
     }
 
 }

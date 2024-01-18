@@ -16,25 +16,47 @@ class CityController extends BaseController {
 
 
     public function getCities(Request $request, Response $response) {
-        $cities = $this->cityService->getCities();
-        return $this->writeJson($response, $cities, 200);
+        $fountCities = $this->cityService->getCities();
+        return $this->writeJson($response, $fountCities, 200);
     }
 
     public function getCityById(Request $request, Response $response, array $args) {
         $cityId = (int)$args['id'];
-        $city = $this->cityService->getCityById($cityId);
-        if (!$city) {
-            return $this->handleError($response, 'City id Not found', 404);
+        $fountCity = $this->cityService->getCityById($cityId);
+        if (!$fountCity) {
+            return $this->handleError($response, 'City id not found', 404);
         }        
-        return $this->writeJson($response, $city, 200);
+        return $this->writeJson($response, $fountCity, 200);
     }
 
     public function getCityByName(Request $request, Response $response, array $args) {
         $cityName = (string)$args['name'];
-        $city = $this->cityService->getCityByName($cityName);
-        if (!$city) {
-            return $this->handleError($response, 'City name Not found', 404);
+        $fountCity = $this->cityService->getCityByName(trim($cityName));
+        if (!$fountCity) {
+            return $this->handleError($response, 'City name not found', 404);
         }        
-        return $this->writeJson($response, $city, 200);
+        return $this->writeJson($response, $fountCity, 200);
     }
+
+    public function getCitiesByRegionId(Request $request, Response $response, array $args) {
+        $regionId = (int)$args['id'];
+        $fountCities = $this->cityService->getCitiesByRegionId($regionId);
+
+        if (!$fountCities) {
+            return $this->handleError($response, 'No cities fount', 404);
+        }        
+        return $this->writeJson($response, $fountCities, 200);
+    }
+
+    public function getCitiesByRegionName(Request $request, Response $response, array $args) {
+        $regionName = (string)$args['name'];
+        $fountCities = $this->cityService->getCitiesByRegionName($regionName);
+
+        if (!$fountCities) {
+            return $this->handleError($response, 'No cities fount', 404);
+        }        
+        return $this->writeJson($response, $fountCities, 200);
+    }
+    
+
 }

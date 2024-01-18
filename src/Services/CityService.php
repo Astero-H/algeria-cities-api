@@ -2,7 +2,7 @@
 
 namespace App\Services;
 
-class CityService {
+class CityService extends BaseService {
     private $citiesData;
 
     public function __construct(array $citiesData) {
@@ -20,6 +20,10 @@ class CityService {
             } 
         }
         return null;
+    }
+
+    public function getCityByName(string $name) {
+        return $this->handleDataList($name, $this->citiesData, 'commune_name_ascii');
     }
 
 }

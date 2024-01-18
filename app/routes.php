@@ -16,10 +16,12 @@ return function (App $app) {
     /** Routes définitions */
     $app->get('/cities', [CityController::class , 'getCities']); 
     $app->get('/cities/{id:[0-9]+}', [CityController::class , 'getCityById']); 
+    $app->get('/cities/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCityByName']); 
 
     $app->get('/regions', [RegionController::class , 'getRegions']); 
     $app->get('/regions/{id:[0-9]+}', [RegionController::class , 'getRegionById']); 
+    $app->get('/regions/name/{name:[a-zA-Z \- ]+}', [RegionController::class , 'getRegionByName']);
 
-    $app->get('/cities/name/{name:[a-zA-Z]+}', [CityController::class , 'getCityByName']); 
-    $app->get('/regions/name/{name:[a-zA-Z]+}', [RegionController::class , 'getRegionByName']);
+    $app->get('/region/id/{id:[0-9]+}', [CityController::class , 'getCitiesByRegionId']); 
+    $app->get('/region/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCitiesByRegionName']); 
 };

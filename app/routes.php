@@ -2,6 +2,7 @@
 
 use Slim\App;
 use App\Controllers\CityController;
+use App\Controllers\RegionController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
 
@@ -14,17 +15,11 @@ return function (App $app) {
 
     /** Routes définitions */
     $app->get('/cities', [CityController::class , 'getCities']); 
-    $app->get('/cities/{id}', [CityController::class , 'getCityById']); 
+    $app->get('/cities/{id:[0-9]+}', [CityController::class , 'getCityById']); 
 
-    // $app->get('/regions', [RegionController::class , 'getRegions']); 
-    // $app->get('/regions/{id}', [RegionController::class , 'getRegionById']); 
+    $app->get('/regions', [RegionController::class , 'getRegions']); 
+    $app->get('/regions/{id:[0-9]+}', [RegionController::class , 'getRegionById']); 
 
-    /***
-     * TODO : 
-     * New Routes to add : 
-     * => Get all Wilayas/Regions
-     * => Get Wilaya/Region by ID
-     * => Search City by its name
-     * => Search Wilaya/Region by its name 
-    */
+    $app->get('/cities/name/{name:[a-zA-Z]+}', [CityController::class , 'getCityByName']); 
+    $app->get('/regions/name/{name:[a-zA-Z]+}', [RegionController::class , 'getRegionByName']);
 };

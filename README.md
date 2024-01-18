@@ -17,3 +17,10 @@ This application is based on Slim version 4 framework.
 | GET  | /regions/name/{name} | Get a wilaya/region by its name               |
 | GET  | /region/id/{id}      | Get all cities of a wilaya/region by its id   |
 | GET  | /region/name/{name}  | Get all cities of a wilaya/region by its name |
+
+
+## Credits
+
+The list of wilayas are collected from [Wilaya-Of-Algeria](https://github.com/AbderrahmeneDZ/Wilaya-Of-Algeria/blob/master/Wilaya_Of_Algeria.json)
+
+The list of cities are collected from  [Cities-Of-Algeria](https://github.com/othmanus/algeria-cities/blob/master/json/algeria_cities.json)

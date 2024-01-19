@@ -12,7 +12,6 @@ git clone https://github.com/Astero-H/algeria-cities-api.git
 composer install
 cd public/
 php -S localhost:8888
-
 ```
 
 ## Features

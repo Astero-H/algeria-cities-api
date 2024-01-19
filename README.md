@@ -4,6 +4,15 @@ algeria-cities-api is an API allowing you to retrieve multiple information about
 
 This application is based on Slim version 4 framework.
 
+# Steps :
+
+```
+git clone https://github.com/Astero-H/algeria-cities-api.git
+composer install
+cd public/
+php -S localhost:8888
+```
+
 
 ## Features
 

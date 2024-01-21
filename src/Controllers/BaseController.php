@@ -13,7 +13,7 @@ abstract class BaseController {
     }   
 
     protected function handleError(Response $response, string $message, $status = 400) {
-        $errorData = ['error' => $message];
+        $errorData = ['Data Error' => $message];
         return $this->writeJson($response, $errorData, $status);
     }   
 }

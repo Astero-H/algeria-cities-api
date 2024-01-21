@@ -6,7 +6,7 @@ use App\Controllers\HomeController;
 use App\Controllers\RegionController;
 use Psr\Http\Message\ResponseInterface as Response;
 use Psr\Http\Message\ServerRequestInterface as Request;
-
+use Slim\Routing\RouteCollectorProxy;
 
 return function (App $app) {
     $app->options('/{routes:.*}', function (Request $request, Response $response) {
@@ -15,15 +15,23 @@ return function (App $app) {
     });
 
     /** Routes définitions */
+
     $app->get('/', [HomeController::class , 'index']);
-    $app->get('/cities', [CityController::class , 'getCities']); 
-    $app->get('/cities/{id:[0-9]+}', [CityController::class , 'getCityById']); 
-    $app->get('/cities/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCityByName']); 
+    
+    $app->group('cities', function (RouteCollectorProxy $group) {
+        $group->get('', [CityController::class , 'getCities']); 
+        $group->get('/{id:[0-9]+}', [CityController::class , 'getCityById']); 
+        $group->get('/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCityByName']); 
+    });
 
-    $app->get('/regions', [RegionController::class , 'getRegions']); 
-    $app->get('/regions/{id:[0-9]+}', [RegionController::class , 'getRegionById']); 
-    $app->get('/regions/name/{name:[a-zA-Z \- ]+}', [RegionController::class , 'getRegionByName']);
+    $app->group('regions', function (RouteCollectorProxy $group) {
+        $group->get('', [RegionController::class , 'getRegions']); 
+        $group->get('/{id:[0-9]+}', [RegionController::class , 'getRegionById']); 
+        $group->get('/name/{name:[a-zA-Z \- ]+}', [RegionController::class , 'getRegionByName']);
+    });
 
-    $app->get('/region/id/{id:[0-9]+}', [CityController::class , 'getCitiesByRegionId']); 
-    $app->get('/region/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCitiesByRegionName']); 
+    $app->group('region', function (RouteCollectorProxy $group) {
+        $group->get('/region/id/{id:[0-9]+}', [CityController::class , 'getCitiesByRegionId']); 
+        $group->get('/region/name/{name:[a-zA-Z \- ]+}', [CityController::class , 'getCitiesByRegionName']); 
+    });
 };

@@ -1,7 +1,7 @@
 <?php 
-use App\Controllers\CityController;
 use DI\ContainerBuilder;
 use Slim\Factory\AppFactory;
+use App\Middlewares\CheckUriMiddleware;
 
 require __DIR__ . '/../vendor/autoload.php';
 
@@ -12,6 +12,7 @@ $container = $containerBuilder->build();
 AppFactory::setContainer($container);
 
 $app = AppFactory::create();
+$app->add(new CheckUriMiddleware());
 
 
 // Register routes

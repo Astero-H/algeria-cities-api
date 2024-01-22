@@ -1,19 +1,16 @@
 <?php 
-use DI\ContainerBuilder;
-use Slim\Factory\AppFactory;
-use App\Middlewares\CheckUriMiddleware;
 
+use App\Middlewares\CheckUriMiddleware;
+use Slim\Factory\AppFactory;
 require __DIR__ . '/../vendor/autoload.php';
 
-$containerBuilder = new ContainerBuilder();
-$definitions = require dirname(__DIR__). '/app/containers.php';
-$containerBuilder->addDefinitions($definitions);
-$container = $containerBuilder->build();
+// Loading container settings
+$container = require dirname(__DIR__). '/app/containers.php';
 AppFactory::setContainer($container);
-
 $app = AppFactory::create();
-$app->add(new CheckUriMiddleware());
 
+// Add middleware
+$app->add(new CheckUriMiddleware());
 
 // Register routes
 $routes = require dirname(__DIR__). '/app/routes.php';

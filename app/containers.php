@@ -4,8 +4,10 @@ use App\Controllers\CityController;
 use App\Controllers\RegionController;
 use App\Services\CityService;
 use App\Services\RegionService;
+use DI\ContainerBuilder;
 
-return [
+
+$definitions =  [
     CityController::class => function ($container) {
         return new CityController($container->get(CityService::class));
     },
@@ -26,3 +28,8 @@ return [
         return new RegionService($regionsData);
     } 
 ];
+
+$containerBuilder = new ContainerBuilder();
+$containerBuilder->addDefinitions($definitions);
+$container = $containerBuilder->build();
+return $container;
